@@ -1,24 +1,31 @@
 import ReactDOM from 'react-dom';
 import React, { Component } from 'react';
-import AddNote from './components/addNote';
+import Immutable from 'immutable';
+import InputNote from './components/inputNote';
 import Note from './components/Note';
 import './style.scss';
 
 // will render notes as a whole. will render the addNote component and note component
 class App extends Component {
+  // constructor
   constructor(props) {
     super(props);
-
+    // attributes 
     this.state = {
-      notes: Map(),
+      notes: Immutable.Map(),
+      idcount: 0,
     };
+    // methods
+    // this.addNote = this.addNote.bind(this);
+    // this.deleteNote = this.deleteNote.bind(this);
+    // this.update = this.update.bind(this);
   }
 
   render() {
     return (
       <div>
+        <InputNote />
         <Note />
-        <AddNote />
         <h1>hehehe</h1>
       </div>
     );

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 
-// will render notes as a whole. will render the addNote component and note component
 class Note extends Component {
   constructor(props) {
     super(props);

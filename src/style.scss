@@ -1,6 +1,6 @@
 body, html {
   font-family: "Raleway", sans-serif;
-  color: white;
+  color:black;
   background: linear-gradient(to bottom, #336d71 0%,#428283 40%,#ffffff 100%);
   height: 100%;
 }
@@ -11,4 +11,9 @@ body, html {
 
 .title-submit {
   padding: 10px;
+}
+
+.note {
+  background-color: white;
+  
 }

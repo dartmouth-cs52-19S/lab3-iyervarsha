@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import Immutable from 'immutable';
 import InputNote from './components/inputNote';
 import Note from './components/Note';
+
+import ReactStickies from 'react-stickies'; //ES6
 import './style.scss';
 
 // will render notes as a whole. will render the addNote component and note component
@@ -25,6 +27,10 @@ class App extends Component {
     return (
       <div>
         <InputNote />
+        <Note />
+        <Note />
+        <Note />
+        <Note />
         <Note />
         <h1>hehehe</h1>
       </div>

@@ -1,18 +1,17 @@
 import ReactDOM from 'react-dom';
 import React, { Component } from 'react';
 import Immutable from 'immutable';
-import InputNote from './components/inputNote';
+// import InputNote from './components/inputNote';
 import Note from './components/Note';
-
-import ReactStickies from 'react-stickies'; //ES6
 import './style.scss';
+import InputNote from './components/inputNote';
 
 // will render notes as a whole. will render the addNote component and note component
 class App extends Component {
   // constructor
   constructor(props) {
     super(props);
-    // attributes 
+    // attributes
     this.state = {
       notes: Immutable.Map(),
       idcount: 0,
@@ -26,8 +25,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <InputNote />
-        <Note />
+        <InputNote></InputNote>
         <Note />
         <Note />
         <Note />

@@ -1,7 +1,7 @@
+/* eslint-disable react/no-unused-state */
 import ReactDOM from 'react-dom';
 import React, { Component } from 'react';
-import Immutable from 'immutable';
-// import InputNote from './components/inputNote';
+import { Map } from 'immutable';
 import Note from './components/Note';
 import './style.scss';
 import InputNote from './components/inputNote';
@@ -13,24 +13,43 @@ class App extends Component {
     super(props);
     // attributes
     this.state = {
-      notes: Immutable.Map(),
+      notes: Map(),
       idcount: 0,
     };
     // methods
-    // this.addNote = this.addNote.bind(this);
-    // this.deleteNote = this.deleteNote.bind(this);
+
+    // Binding functions give the function access to state and props
+    this.addNote = this.addNote.bind(this);
+    this.deleteNote = this.deleteNote.bind(this);
     // this.update = this.update.bind(this);
   }
+
+
+  deleteNote() {
+    this.setState(prevState => ({
+      notes: prevState.notes.delete(prevState.idcount),
+    }));
+  }
+
+  addNote(t) {
+    this.setState(prevState => ({
+      notes: prevState.notes.set(prevState.idcount, {
+        title: t,
+      }),
+      idcount: prevState + 1,
+    }));
+  }
+
 
   render() {
     return (
       <div>
-        <InputNote></InputNote>
-        <Note />
-        <Note />
-        <Note />
-        <Note />
-        <h1>hehehe</h1>
+        <InputNote submitTitle={this.addNote} />
+        {this.state.notes.entrySeq().map(([id, note]) => {
+          return (
+            <Note id={id} title={note.title} x={30} y={30} />
+          );
+        })}
       </div>
     );
   }

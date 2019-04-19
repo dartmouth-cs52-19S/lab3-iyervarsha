@@ -8,7 +8,7 @@ class InputNote extends Component {
 
     this.state = { notetitle: '' };
     this.onInputChange = this.onInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.submitButtonClicked = this.submitButtonClicked.bind(this);
   }
 
   onInputChange(event) {
@@ -16,19 +16,16 @@ class InputNote extends Component {
     this.setState({ notetitle: event.target.value });
   }
 
-  handleSubmit(event) {
+  submitButtonClicked(event) {
     event.preventDefault();
-    this.props.addNote(this.state.notetitle);
-    this.setState({
-      notetitle: '',
-    });
+    this.props.submitTitle(this.state.notetitle);
   }
 
   render() {
     return (
       <div>
-        <input id = "searchBar" placeholder="Note Title..." onChange={this.onInputChange} value={this.state.notetitle} />
-        <button className="title-submit" onClick={this.handleSubmit}> SUBMIT </button>
+        <input id="searchBar" placeholder="Note Title..." onChange={this.onInputChange} value={this.state.notetitle} />
+        <button type="submit" className="title-submit" onClick={this.submitButtonClicked}> SUBMIT </button>
       </div>
     );
   }

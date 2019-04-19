@@ -1,7 +1,8 @@
 body, html {
   font-family: "Raleway", sans-serif;
-  color:black;
-  background: linear-gradient(to bottom, #336d71 0%,#428283 40%,#ffffff 100%);
+  background-color: #704a3c;
+  background-image: url("https://www.transparenttextures.com/patterns/beige-paper.png");
+
   height: 100%;
 }
 
@@ -13,10 +14,28 @@ body, html {
   padding: 10px;
 }
 
+.note {
+  position: absolute;
+}
+
 .note-body {
   box-sizing: border-box;
   min-width: 200px;
   min-height: 200px;
-  border-color: #1b383a;
-  border-width: 5px;
+
 }
+
+.right-header {
+  display: flex;
+  padding: 5px; 
+  background-color: #90addb;
+}
+
+.icons {
+  display: flex;
+}
+
+.flex-item {
+  padding: 0px 5px;
+}
+

@@ -21,22 +21,36 @@ class App extends Component {
     // Binding functions give the function access to state and props
     this.addNote = this.addNote.bind(this);
     this.deleteNote = this.deleteNote.bind(this);
-    // this.update = this.update.bind(this);
+    this.update = this.update.bind(this);
   }
 
-
-  deleteNote() {
+  update(id, x, y) {
+    console.log('at update');
+    console.log(x);
     this.setState(prevState => ({
-      notes: prevState.notes.delete(prevState.idcount),
+      notes: prevState.notes.update(id, (n) => { return Object.assign({}, n, x, y); }),
     }));
   }
 
+  deleteNote(id) {
+    // console.log('deleteNode func');
+    // console.log(this.state.idcount);
+    this.setState(prevState => ({
+      // prevState.id
+      notes: prevState.notes.delete(id),
+    }));
+  }
+
+
   addNote(t) {
+    // prevState gives us access to the whole map
     this.setState(prevState => ({
       notes: prevState.notes.set(prevState.idcount, {
+        xpos: 20,
+        ypos: 20,
         title: t,
       }),
-      idcount: prevState + 1,
+      idcount: prevState.idcount + 1,
     }));
   }
 
@@ -47,7 +61,7 @@ class App extends Component {
         <InputNote submitTitle={this.addNote} />
         {this.state.notes.entrySeq().map(([id, note]) => {
           return (
-            <Note id={id} title={note.title} x={30} y={30} />
+            <Note id={id} note={note} title={note.title} x={30} y={30} deleteNote={this.deleteNote} update={this.update} />
           );
         })}
       </div>

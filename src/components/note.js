@@ -19,15 +19,16 @@ class Note extends Component {
     // this.onStopDrag = this.onStopDrag.bind(this);
     this.renderSomeSection = this.renderSomeSection.bind(this);
     this.onDeleteClick = this.onDeleteClick.bind(this);
-    this.changeToggle = this.changeToggle.bind(this);
+    // this.changeToggle = this.changeToggle.bind(this);
     this.onDrag = this.onDrag.bind(this);
+    this.edit = this.edit.bind(this);
   }
 
-  onChange(event) {
-    console.log(event.target.value);
-    // this.setState({ text: event.target.value });
-    this.props.update(this.props.id, { text: event.target.value });
-  }
+  // onChange(event) {
+  //   console.log(event.target.value);
+  //   // this.setState({ text: event.target.value });
+  //   this.props.update(this.props.id, { text: event.target.value });
+  // }
 
   onDeleteClick(event) {
     console.log('at OnDeleteClick');
@@ -40,9 +41,11 @@ class Note extends Component {
     event.preventDefault();
     console.log(ui);
     this.props.update(this.props.id, ui.x, ui.y);
+    // this.props.x(this.props.id, ui.x);
+    // this.props.y(this.props.id, ui.y);
     // this.props.update(this.props.id, { x: ui.x, y: ui.y });
     // if (ui.y > -50 && ui.x > 0) {
-    //   // this.props.update(this.props.id, { x: position.x, y: position.y });
+    // this.props.update(this.props.id, { x: position.x, y: position.y });
     //   this.setState({
     //     x: ui.x,
     //     y: ui.y,
@@ -58,14 +61,29 @@ class Note extends Component {
   //   });
   // }
 
-  changeToggle(event) {
+  // changeToggle(event) {
+  //   event.preventDefault();
+  //   console.log('we are trying to edit');
+  //   this.setState(prevState => ({
+  //     isEditing: !prevState.isEditing,
+  //   }));
+  // }
+
+  onContentChange(event) {
+    console.log('onContentChange');
+    console.log(event.target.value);
     event.preventDefault();
-    console.log('we are trying to edit');
-    this.setState(prevState => ({
-      isEditing: !prevState.isEditing,
-    }));
+    this.props.updateContent(this.props.id, event.target.value);
   }
 
+  edit(event) {
+    event.preventDefault();
+    if (this.state.isEditing) {
+      this.setState({ isEditing: false });
+    } else {
+      this.setState({ isEditing: true });
+    }
+  }
 
   renderSomeSection() {
     // eslint-disable-next-line react/destructuring-assignment
@@ -75,6 +93,7 @@ class Note extends Component {
         <div className="editing-note-body">
           <TextareaAutosize
             class="note-body"
+            onChange={this.onContentChange}
             minRows={3}
             maxRows={6}
             maxLength="350"
@@ -84,14 +103,15 @@ class Note extends Component {
         </div>
       );
     } else {
-      return (
-        <div>
-          <div className="default-note-body">
-            <h1>hehehe</h1>
-            <div className="noteBody" dangerouslySetInnerHTML={{ __html: marked(this.props.note.text || '') }} />
-          </div>
-        </div>
-      );
+      // return (
+      return <div className="noteBody" dangerouslySetInnerHTML={{ __html: marked(this.props.note.text || '') }} />;
+      // <div>
+      //   <div className="default-note-body">
+      //     <h1>hehehe</h1>
+      //     <div className="noteBody" dangerouslySetInnerHTML={{ __html: marked(this.props.note.text || '') }} />
+      //   </div>
+      // </div>
+      // );
     }
   }
 
@@ -102,9 +122,10 @@ class Note extends Component {
         grid={[25, 25]}
         defaultPosition={{ x: 50, y: 50 }}
         position={{ x: this.props.note.x, y: this.props.note.y }}
-        // onStart={this.onStartDrag}
+        // position={{ x: this.state.x, y: this.state.y }}
+        onStart={this.onStartDrag}
         onDrag={this.onDrag}
-        // onStop={this.onDrag}
+        onStop={this.onStop}
       >
         <div className="note">
           <div className="note-header">
@@ -113,7 +134,7 @@ class Note extends Component {
               <div className="icons">
                 {/* <div className="notebar flex-item"><a href=" " onClick={this.changeToggle}><i className="fa fa-pencil-square-o fa-1x" /></a></div> */}
 
-                <div className="flex-item"><i className="fa fa-pencil-square-o fa-1x" /></div>
+                <div onClick={this.edit} className="flex-item"><i className="fa fa-pencil-square-o fa-1x" /></div>
                 <i onClick={this.onDeleteClick} className="fa fa-trash fa-1x" />
                 {/* <div className="flex-item"><i onClick={this.onDeleteClick} className="fa fa-trash fa-1x" /></div> */}
                 {/* <div><a className="flex-item" href=" " onClick={this.onDeleteClick}><i className="fa fa-trash fa-1x" /></a></div> */}
@@ -123,15 +144,15 @@ class Note extends Component {
               {/* <button type="submit" className="delete-note"> Delete</button> */}
             </div>
           </div>
-          {/* <div className="body">{this.renderSomeSection()}</div> */}
-          <div>
+          {this.renderSomeSection()}
+          {/* <div>
             <TextareaAutosize
               className="note-body"
               minRows={3}
               maxRows={6}
               maxLength="350"
             />
-          </div>
+          </div> */}
           {/* <div className="body">{this.renderSomeSection()}</div> */}
         </div>
       </Draggable>

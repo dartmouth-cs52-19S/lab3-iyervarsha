@@ -39,3 +39,16 @@ body, html {
   padding: 0px 5px;
 }
 
+.default-note-body {
+  background-color: transparent;
+  display: flex;
+  height: 100%;
+  margin: 1rem;
+}
+
+.noteBody {
+  min-height: 180px;
+  min-width: 200px;
+  background-color: white; 
+}
+

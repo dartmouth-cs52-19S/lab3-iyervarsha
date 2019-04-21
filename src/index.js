@@ -24,16 +24,24 @@ class App extends Component {
     this.update = this.update.bind(this);
   }
 
+  updateContent(id, content) {
+    console.log('updating content');
+    this.setState(prevState => ({
+      notes: prevState.notes.update(id, (n) => {
+        return Object.assign({}, n, content);
+      }),
+    }));
+  }
+
   update(id, x, y) {
     console.log('at update');
-    console.log(x);
     this.setState(prevState => ({
       notes: prevState.notes.update(id, (n) => { return Object.assign({}, n, x, y); }),
     }));
   }
 
   deleteNote(id) {
-    // console.log('deleteNode func');
+    console.log('deleteNode func');
     // console.log(this.state.idcount);
     this.setState(prevState => ({
       // prevState.id
@@ -49,6 +57,7 @@ class App extends Component {
         xpos: 20,
         ypos: 20,
         title: t,
+        text: '',
       }),
       idcount: prevState.idcount + 1,
     }));
@@ -61,7 +70,7 @@ class App extends Component {
         <InputNote submitTitle={this.addNote} />
         {this.state.notes.entrySeq().map(([id, note]) => {
           return (
-            <Note id={id} note={note} title={note.title} x={30} y={30} deleteNote={this.deleteNote} update={this.update} />
+            <Note id={id} note={note} title={note.title} x={30} y={30} deleteNote={this.deleteNote} update={this.update} updateContent={this.updateContent} />
           );
         })}
       </div>

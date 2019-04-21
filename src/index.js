@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import React, { Component } from 'react';
 import { Map } from 'immutable';
 import Note from './components/Note';
+import * as db from './services/datastore';
 import './style.scss';
 import InputNote from './components/inputNote';
 
@@ -21,47 +22,58 @@ class App extends Component {
     // Binding functions give the function access to state and props
     this.addNote = this.addNote.bind(this);
     this.deleteNote = this.deleteNote.bind(this);
-    this.update = this.update.bind(this);
+    this.updateContent = this.updateContent.bind(this);
+    // this.moveXY = this.moveXY.bind(this);
+  }
+
+  componentDidMount() {
+    db.fetchNotes((notes) => {
+      this.setState({ notes: Map(notes) });
+    });
   }
 
   updateContent(id, content) {
     console.log('updating content');
-    this.setState(prevState => ({
-      notes: prevState.notes.update(id, (n) => {
-        return Object.assign({}, n, content);
-      }),
-    }));
-  }
-
-  update(id, x, y) {
-    console.log('at update');
-    this.setState(prevState => ({
-      notes: prevState.notes.update(id, (n) => { return Object.assign({}, n, x, y); }),
-    }));
+    db.update(id, Object.assign({}, this.state.notes.get(id), content));
+    // this.setState(prevState => ({
+    //   notes: prevState.notes.update(id, (n) => {
+    //     return Object.assign({}, n, content);
+    //   }),
+    // }));
   }
 
   deleteNote(id) {
     console.log('deleteNode func');
+    console.log(this.id);
+    db.deleteNote(id);
     // console.log(this.state.idcount);
-    this.setState(prevState => ({
-      // prevState.id
-      notes: prevState.notes.delete(id),
-    }));
+    // this.setState(prevState => ({
+    //   // prevState.id
+    //   notes: prevState.notes.delete(id),
+    // }));
   }
 
 
   addNote(t) {
     // prevState gives us access to the whole map
-    this.setState(prevState => ({
-      notes: prevState.notes.set(prevState.idcount, {
-        xpos: 20,
-        ypos: 20,
-        title: t,
-        text: '',
-      }),
-      idcount: prevState.idcount + 1,
-    }));
+    // db.newNote(t);
+    console.log(this.t);
+    db.addNote(t);
+    // this.setState(prevState => ({
+    //   notes: prevState.notes.set(prevState.idcount, {
+    //     xpos: 20,
+    //     ypos: 20,
+    //     title: t,
+    //     text: '',
+    //   }),
+    //   idcount: prevState.idcount + 1,
+    // }));
   }
+
+  // moveXY(id, x, y) {
+  //   console.log(this.x);
+  //   db.moveXY(id, x, y);
+  // }
 
 
   render() {
@@ -70,7 +82,7 @@ class App extends Component {
         <InputNote submitTitle={this.addNote} />
         {this.state.notes.entrySeq().map(([id, note]) => {
           return (
-            <Note id={id} note={note} title={note.title} x={30} y={30} deleteNote={this.deleteNote} update={this.update} updateContent={this.updateContent} />
+            <Note id={id} note={note} title={note.title} x={30} y={30} deleteNote={this.deleteNote} updateContent={this.updateContent} />
           );
         })}
       </div>

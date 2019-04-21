@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import Draggable from 'react-draggable'; // The default
@@ -15,7 +16,6 @@ class Note extends Component {
       x: this.props.x,
       y: this.props.y,
     };
-    // this.onDrag = this.onDrag.bind(this);
     // this.onStopDrag = this.onStopDrag.bind(this);
     this.renderSomeSection = this.renderSomeSection.bind(this);
     this.onDeleteClick = this.onDeleteClick.bind(this);

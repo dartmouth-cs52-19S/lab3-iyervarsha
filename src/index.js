@@ -23,7 +23,7 @@ class App extends Component {
     this.addNote = this.addNote.bind(this);
     this.deleteNote = this.deleteNote.bind(this);
     this.updateContent = this.updateContent.bind(this);
-    // this.moveXY = this.moveXY.bind(this);
+    this.moveXY = this.moveXY.bind(this);
   }
 
   componentDidMount() {
@@ -34,7 +34,7 @@ class App extends Component {
 
   updateContent(id, content) {
     console.log('updating content');
-    db.update(id, Object.assign({}, this.state.notes.get(id), content));
+    db.updateContent(id, Object.assign({}, this.state.notes.get(id), content));
     // this.setState(prevState => ({
     //   notes: prevState.notes.update(id, (n) => {
     //     return Object.assign({}, n, content);
@@ -56,7 +56,6 @@ class App extends Component {
 
   addNote(t) {
     // prevState gives us access to the whole map
-    // db.newNote(t);
     console.log(this.t);
     db.addNote(t);
     // this.setState(prevState => ({
@@ -70,10 +69,11 @@ class App extends Component {
     // }));
   }
 
-  // moveXY(id, x, y) {
-  //   console.log(this.x);
-  //   db.moveXY(id, x, y);
-  // }
+  moveXY(id, x, y) {
+    console.log(this.x);
+    console.log('at moveXY');
+    db.updateXY(id, x, y);
+  }
 
 
   render() {
@@ -82,7 +82,7 @@ class App extends Component {
         <InputNote submitTitle={this.addNote} />
         {this.state.notes.entrySeq().map(([id, note]) => {
           return (
-            <Note id={id} note={note} title={note.title} x={30} y={30} deleteNote={this.deleteNote} updateContent={this.updateContent} />
+            <Note id={id} note={note} title={note.title} x={30} y={30} deleteNote={this.deleteNote} updateContent={this.updateContent} moveXY={this.moveXY} />
           );
         })}
       </div>

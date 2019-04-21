@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import Draggable from 'react-draggable'; // The default
 import TextareaAutosize from 'react-textarea-autosize';
 import marked from 'marked';
+import { TextArea } from 'semantic-ui-react';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faTrashO } from '@fortawesome/free-solid-svg-icons';
 
@@ -40,7 +41,7 @@ class Note extends Component {
     console.log('at onDrag');
     event.preventDefault();
     console.log(ui);
-    this.props.update(this.props.id, ui.x, ui.y);
+    this.props.moveXY(this.props.id, ui.x, ui.y);
     // this.props.x(this.props.id, ui.x);
     // this.props.y(this.props.id, ui.y);
     // this.props.update(this.props.id, { x: ui.x, y: ui.y });
@@ -72,8 +73,9 @@ class Note extends Component {
   onContentChange(event) {
     console.log('onContentChange');
     console.log(event.target.value);
+    console.log(this.props.id);
     event.preventDefault();
-    this.props.updateContent(this.props.id, event.target.value);
+    this.props.updateContent(0, event.target.value);
   }
 
   edit(event) {
@@ -82,6 +84,26 @@ class Note extends Component {
       this.setState({ isEditing: false });
     } else {
       this.setState({ isEditing: true });
+    }
+  }
+
+  renderTitle() {
+    if (this.state.isEditing) {
+      console.log('i am editing the title');
+      return (
+        <div>
+          <TextArea
+            class="note-title"
+            onChange={this.onContentChange}
+            minRows={1}
+            maxRows={1}
+            defaultValue={this.props.note.title}
+          />
+        </div>
+      );
+    } else {
+      console.log('i am not editing the title');
+      return <div>{this.props.note.title}</div>;
     }
   }
 
@@ -103,15 +125,9 @@ class Note extends Component {
         </div>
       );
     } else {
-      // return (
+      console.log('i am not editing now');
+      // eslint-disable-next-line react/no-danger
       return <div className="noteBody" dangerouslySetInnerHTML={{ __html: marked(this.props.note.text || '') }} />;
-      // <div>
-      //   <div className="default-note-body">
-      //     <h1>hehehe</h1>
-      //     <div className="noteBody" dangerouslySetInnerHTML={{ __html: marked(this.props.note.text || '') }} />
-      //   </div>
-      // </div>
-      // );
     }
   }
 
@@ -130,6 +146,7 @@ class Note extends Component {
         <div className="note">
           <div className="note-header">
             <div className="right-header">
+              {this.renderTitle()}
               <span className="note-title">{this.props.title}</span>
               <div className="icons">
                 {/* <div className="notebar flex-item"><a href=" " onClick={this.changeToggle}><i className="fa fa-pencil-square-o fa-1x" /></a></div> */}

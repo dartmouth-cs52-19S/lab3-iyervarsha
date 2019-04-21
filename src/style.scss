@@ -25,6 +25,14 @@ body, html {
 
 }
 
+.note-title {
+  max-height: 20px;
+  min-height: 20px;
+  max-width: 50px;
+  min-width: 50px;
+  // max-width: 120px;
+}
+
 .right-header {
   display: flex;
   padding: 5px; 

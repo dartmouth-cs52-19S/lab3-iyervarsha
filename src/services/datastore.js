@@ -38,5 +38,11 @@ export function deleteNote(id) {
 }
 
 export function updateContent(id, note) {
+  console.log('at updateContent in firebase');
   database.ref('notes').child(id).set(note);
+}
+
+export function updateXY(id, posx, posy) {
+  console.log('firebase updateXY function');
+  database.ref('notes').child(id).update({ x: posx, y: posy });
 }

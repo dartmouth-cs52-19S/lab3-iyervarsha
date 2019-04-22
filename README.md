@@ -2,6 +2,10 @@
 ## Varsha Iyer
 ## COSC 52
 
+### Website
+
+http://varshaiyer-cs52-lab3.surge.sh/
+
 ### Description 
 This Web app was to help our class learn React by making a note-app. Users can add, delete, edit, and move notes around the 
 webpage. When the user refreshes the page, the notes will stay. 

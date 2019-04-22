@@ -7,17 +7,14 @@ import * as db from './services/datastore';
 import './style.scss';
 import InputNote from './components/inputNote';
 
-// will render notes as a whole. will render the addNote component and note component
+// will render notes as a whole. will render the inputNote component and note component
 class App extends Component {
-  // constructor
   constructor(props) {
     super(props);
-    // attributes
     this.state = {
       notes: Map(),
       idcount: 0,
     };
-    // methods
 
     // Binding functions give the function access to state and props
     this.addNote = this.addNote.bind(this);
@@ -48,27 +45,12 @@ class App extends Component {
     console.log('deleteNode func');
     console.log(this.id);
     db.deleteNote(id);
-    // console.log(this.state.idcount);
-    // this.setState(prevState => ({
-    //   // prevState.id
-    //   notes: prevState.notes.delete(id),
-    // }));
   }
 
 
   addNote(t) {
-    // prevState gives us access to the whole map
     console.log(this.t);
     db.addNote(t);
-    // this.setState(prevState => ({
-    //   notes: prevState.notes.set(prevState.idcount, {
-    //     xpos: 20,
-    //     ypos: 20,
-    //     title: t,
-    //     text: '',
-    //   }),
-    //   idcount: prevState.idcount + 1,
-    // }));
   }
 
   moveXY(id, x, y) {

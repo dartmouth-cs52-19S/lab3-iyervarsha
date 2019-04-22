@@ -37,12 +37,17 @@ export function deleteNote(id) {
   database.ref('notes').child(id).remove();
 }
 
-export function updateContent(id, note) {
+export function updateContent(id, body) {
   console.log('at updateContent in firebase');
-  database.ref('notes').child(id).set(note);
+  database.ref('notes').child(id).update({ note: body });
 }
 
 export function updateXY(id, posx, posy) {
   console.log('firebase updateXY function');
   database.ref('notes').child(id).update({ x: posx, y: posy });
+}
+
+export function updateTitle(id, t) {
+  console.log('at updateTitle in firebase');
+  database.ref('notes').child(id).update({ title: t });
 }

@@ -22,7 +22,7 @@ class App extends Component {
     // Binding functions give the function access to state and props
     this.addNote = this.addNote.bind(this);
     this.deleteNote = this.deleteNote.bind(this);
-    this.updateContent = this.updateContent.bind(this);
+    this.content = this.content.bind(this);
     this.moveXY = this.moveXY.bind(this);
   }
 
@@ -32,9 +32,16 @@ class App extends Component {
     });
   }
 
-  updateContent(id, content) {
-    console.log('updating content');
-    db.updateContent(id, Object.assign({}, this.state.notes.get(id), content));
+  // eslint-disable-next-line class-methods-use-this
+  changeTitle(id, content) {
+    console.log('changing title');
+    db.updateTitle(id, content);
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  content(id, content) {
+    console.log('change content');
+    db.updateContent(id, content);
     // this.setState(prevState => ({
     //   notes: prevState.notes.update(id, (n) => {
     //     return Object.assign({}, n, content);
@@ -82,7 +89,7 @@ class App extends Component {
         <InputNote submitTitle={this.addNote} />
         {this.state.notes.entrySeq().map(([id, note]) => {
           return (
-            <Note id={id} note={note} title={note.title} x={30} y={30} deleteNote={this.deleteNote} updateContent={this.updateContent} moveXY={this.moveXY} />
+            <Note id={id} note={note} title={note.title} x={30} y={30} deleteNote={this.deleteNote} content={this.content} moveXY={this.moveXY} changeTitle={this.changeTitle} />
           );
         })}
       </div>

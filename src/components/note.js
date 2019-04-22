@@ -23,6 +23,8 @@ class Note extends Component {
     // this.changeToggle = this.changeToggle.bind(this);
     this.onDrag = this.onDrag.bind(this);
     this.edit = this.edit.bind(this);
+    this.onContentChange = this.onContentChange.bind(this);
+    this.onTitleChange = this.onTitleChange.bind(this);
   }
 
   // onChange(event) {
@@ -70,12 +72,20 @@ class Note extends Component {
   //   }));
   // }
 
+  onTitleChange(event) {
+    console.log('onTitleChange');
+    event.preventDefault();
+    this.props.changeTitle(this.props.id, event.target.value);
+  }
+
   onContentChange(event) {
     console.log('onContentChange');
     console.log(event.target.value);
-    console.log(this.props.id);
+    // console.log(this.props.id);
     event.preventDefault();
-    this.props.updateContent(0, event.target.value);
+    console.log(this.props.id);
+    console.log(event.target.value);
+    this.props.content(this.props.id, event.target.value);
   }
 
   edit(event) {
@@ -93,8 +103,8 @@ class Note extends Component {
       return (
         <div>
           <TextArea
-            class="note-title"
-            onChange={this.onContentChange}
+            className="note-title"
+            onChange={this.onTitleChange}
             minRows={1}
             maxRows={1}
             defaultValue={this.props.note.title}
@@ -120,7 +130,7 @@ class Note extends Component {
             maxRows={6}
             maxLength="350"
             // eslint-disable-next-line react/destructuring-assignment
-            defaultValue={this.props.note.text}
+            DefaultValue={this.props.note.text}
           />
         </div>
       );
@@ -147,7 +157,7 @@ class Note extends Component {
           <div className="note-header">
             <div className="right-header">
               {this.renderTitle()}
-              <span className="note-title">{this.props.title}</span>
+              {/* <span className="note-title">{this.props.title}</span> */}
               <div className="icons">
                 {/* <div className="notebar flex-item"><a href=" " onClick={this.changeToggle}><i className="fa fa-pencil-square-o fa-1x" /></a></div> */}
 

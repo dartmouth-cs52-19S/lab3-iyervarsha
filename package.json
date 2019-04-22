@@ -7,7 +7,7 @@
     "test": "eslint src/**.js",
     "build": "yarn clean; NODE_ENV=production webpack --colors",
     "clean": "rimraf dist",
-    "deploy": "yarn build; surge -p dist -d varshaiyer-cs52-starter.surge.sh; yarn clean"
+    "deploy": "yarn build; surge -p dist -d varshaiyer-cs52-lab3.surge.sh; yarn clean"
   },
   "repository": "https://github.com/dartmouth-cs52-19S/starterpack-iyervarsha.git",
   "author": "Varsha Iyer <varsha.b.iyer@gmail.com>",

@@ -29,7 +29,6 @@ class Note extends Component {
 
   onDrag(event, ui) {
     event.preventDefault();
-    console.log(ui);
     if (ui.x > -50 && ui.y > 0) {
       this.props.moveXY(this.props.id, ui.x, ui.y);
     }

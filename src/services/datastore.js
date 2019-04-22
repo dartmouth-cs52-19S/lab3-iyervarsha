@@ -32,7 +32,6 @@ export function addNote(text) {
 }
 
 export function deleteNote(id) {
-  console.log(database.ref('notes').child(id));
   database.ref('notes').child(id).remove();
 }
 

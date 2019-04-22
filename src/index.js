@@ -59,7 +59,6 @@ class App extends Component {
     db.updateXY(id, x, y);
   }
 
-
   render() {
     return (
       <div>

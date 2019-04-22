@@ -106,6 +106,7 @@ class Note extends Component {
     return (
       <Draggable
         handle=".note-mover"
+        // style={{ zIndex: 100 }}
         grid={[25, 25]}
         defaultPosition={{ x: 50, y: 50 }}
         position={{ x: this.props.note.x, y: this.props.note.y }}

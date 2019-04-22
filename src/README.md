@@ -3,8 +3,13 @@
 ## COSC 52
 
 ### Description 
-### What Worked
-### What Didn't Work
+This Web app was to help our class learn React by making a note-app. Users can add, delete, edit, and move notes around the 
+webpage. When the user refreshes the page, the notes will stay. 
+
+![Image of Note Board](./img/noteboard.png)
+
+### What Worked and Didn't Work 
+I definiteley struggled with the concept of properties versus states when I first started off using React. However, I think I got a hang of it once I started creating more methods and seeing how properties and states were used. Arrow notation for making methods was also initially confusing, but I also eventually got the a hang of it. Implementing the firebase was fairly straightforward once I wrote out all of the functions. 
 ### Extra Credit 
 - I made sure the Notes wouldn't get stuck if the user accidently pushed a note too far out of the page. 
 - My Notes will Increase in Size when the user adds too much text or too large of an Image. 

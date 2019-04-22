@@ -32,22 +32,18 @@ export function addNote(text) {
 }
 
 export function deleteNote(id) {
-  console.log('firebase delete function');
   console.log(database.ref('notes').child(id));
   database.ref('notes').child(id).remove();
 }
 
 export function updateContent(id, body) {
-  console.log('at updateContent in firebase');
   database.ref('notes').child(id).update({ text: body });
 }
 
 export function updateXY(id, posx, posy) {
-  console.log('firebase updateXY function');
   database.ref('notes').child(id).update({ x: posx, y: posy });
 }
 
 export function updateTitle(id, t) {
-  console.log('at updateTitle in firebase');
   database.ref('notes').child(id).update({ title: t });
 }

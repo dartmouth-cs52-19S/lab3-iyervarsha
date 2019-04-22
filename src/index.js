@@ -31,31 +31,27 @@ class App extends Component {
 
   // eslint-disable-next-line class-methods-use-this
   changeTitle(id, content) {
-    console.log('changing title');
     db.updateTitle(id, content);
   }
 
   // eslint-disable-next-line class-methods-use-this
   content(id, content) {
-    console.log('change content');
     db.updateContent(id, content);
   }
 
+  // eslint-disable-next-line class-methods-use-this
   deleteNote(id) {
-    console.log('deleteNode func');
-    console.log(this.id);
     db.deleteNote(id);
   }
 
 
+  // eslint-disable-next-line class-methods-use-this
   addNote(t) {
-    console.log(this.t);
     db.addNote(t);
   }
 
+  // eslint-disable-next-line class-methods-use-this
   moveXY(id, x, y) {
-    console.log(this.x);
-    console.log('at moveXY');
     db.updateXY(id, x, y);
   }
 

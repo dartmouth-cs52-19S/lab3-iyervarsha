@@ -23,13 +23,11 @@ class Note extends Component {
   }
 
   onDeleteClick(event) {
-    console.log('at OnDeleteClick');
     event.preventDefault();
     this.props.deleteNote(this.props.id);
   }
 
   onDrag(event, ui) {
-    console.log('at onDrag');
     event.preventDefault();
     console.log(ui);
     if (ui.x > -50 && ui.y > 0) {
@@ -38,14 +36,12 @@ class Note extends Component {
   }
 
   onTitleChange(event) {
-    console.log('onTitleChange');
     event.preventDefault();
     this.props.changeTitle(this.props.id, event.target.value);
   }
 
   onContentChange(event) {
     event.preventDefault();
-    console.log('onContentChange');
     this.props.content(this.props.id, event.target.value);
   }
 
@@ -60,7 +56,6 @@ class Note extends Component {
 
   renderTitle() {
     if (this.state.isEditing) {
-      console.log('i am editing the title');
       return (
         <div>
           <TextArea
@@ -73,7 +68,6 @@ class Note extends Component {
         </div>
       );
     } else {
-      console.log('i am not editing the title');
       return <div>{this.props.note.title}</div>;
     }
   }
@@ -81,7 +75,6 @@ class Note extends Component {
   renderSomeSection() {
     // eslint-disable-next-line react/destructuring-assignment
     if (this.state.isEditing) {
-      console.log('i am editing now');
       return (
         <div className="editing-note-body">
           <TextareaAutosize
@@ -96,7 +89,6 @@ class Note extends Component {
         </div>
       );
     } else {
-      console.log('i am not editing now');
       // eslint-disable-next-line react/no-danger
       return <div className="noteBody" dangerouslySetInnerHTML={{ __html: marked(this.props.note.text || '') }} />;
     }
@@ -106,7 +98,6 @@ class Note extends Component {
     return (
       <Draggable
         handle=".note-mover"
-        // style={{ zIndex: 100 }}
         grid={[25, 25]}
         defaultPosition={{ x: 50, y: 50 }}
         position={{ x: this.props.note.x, y: this.props.note.y }}

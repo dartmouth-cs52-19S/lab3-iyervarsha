@@ -42,11 +42,6 @@ class App extends Component {
   content(id, content) {
     console.log('change content');
     db.updateContent(id, content);
-    // this.setState(prevState => ({
-    //   notes: prevState.notes.update(id, (n) => {
-    //     return Object.assign({}, n, content);
-    //   }),
-    // }));
   }
 
   deleteNote(id) {

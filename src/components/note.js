@@ -79,12 +79,10 @@ class Note extends Component {
   }
 
   onContentChange(event) {
-    console.log('onContentChange');
-    console.log(event.target.value);
-    // console.log(this.props.id);
     event.preventDefault();
-    console.log(this.props.id);
-    console.log(event.target.value);
+    console.log('onContentChange');
+    // console.log(event.target.value);
+    // console.log(this.props.id);
     this.props.content(this.props.id, event.target.value);
   }
 
@@ -130,13 +128,14 @@ class Note extends Component {
             maxRows={6}
             maxLength="350"
             // eslint-disable-next-line react/destructuring-assignment
-            DefaultValue={this.props.note.text}
+            defaultValue={this.props.note.text}
           />
         </div>
       );
     } else {
       console.log('i am not editing now');
       // eslint-disable-next-line react/no-danger
+      // return <div className="noteBody"> {this.props.note.text} </div>;
       return <div className="noteBody" dangerouslySetInnerHTML={{ __html: marked(this.props.note.text || '') }} />;
     }
   }
@@ -148,7 +147,6 @@ class Note extends Component {
         grid={[25, 25]}
         defaultPosition={{ x: 50, y: 50 }}
         position={{ x: this.props.note.x, y: this.props.note.y }}
-        // position={{ x: this.state.x, y: this.state.y }}
         onStart={this.onStartDrag}
         onDrag={this.onDrag}
         onStop={this.onStop}

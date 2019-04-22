@@ -27,7 +27,7 @@ export function fetchNotes(callback) {
 export function addNote(text) {
   const { key } = firebase.database().ref('notes').push();
   firebase.database().ref('notes').child(key).set({
-    title: text, text: '', x: 30, y: 30,
+    title: text, text: 'enter text', x: 30, y: 30,
   });
 }
 
@@ -39,7 +39,7 @@ export function deleteNote(id) {
 
 export function updateContent(id, body) {
   console.log('at updateContent in firebase');
-  database.ref('notes').child(id).update({ note: body });
+  database.ref('notes').child(id).update({ text: body });
 }
 
 export function updateXY(id, posx, posy) {
